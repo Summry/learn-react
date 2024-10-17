@@ -2,12 +2,16 @@ import { CORE_CONCEPTS } from "./data";
 import Header from "./components/Header/Header";
 import CoreConcept from "./components/CoreConcept/CoreConcept";
 import TabButton from "./components/TabButton/TabButton";
-
-function handleClick(selectedButton) {
-  console.log(selectedButton);
-}
+import { useState } from "react";
 
 function App() {
+  const [selectedTopic, setSelectedTopic] = useState("Please click a button.");
+
+  function handleClick(selectedButton) {
+    setSelectedTopic(selectedButton);
+    // console.log(selectedTopic);
+  }
+
   return (
     <div>
       <Header />
@@ -31,7 +35,7 @@ function App() {
             <TabButton onSelect={() => handleClick("props")}>Props</TabButton>
             <TabButton onSelect={() => handleClick("state")}>State</TabButton>
           </menu>
-          Some dynamic content here
+          {selectedTopic}
         </section>
       </main>
     </div>
