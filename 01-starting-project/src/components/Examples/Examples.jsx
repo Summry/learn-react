@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import TabButton from "../TabButton/TabButton";
 import { EXAMPLES } from "../../data";
+import Section from "../Section/Section";
 
 export default function Examples() {
   const [selectedTopic, setSelectedTopic] = useState();
@@ -14,7 +15,7 @@ export default function Examples() {
     <TabButton
       key={topic.title.toLowerCase()}
       isSelected={selectedTopic === topic.title.toLowerCase()}
-      onSelect={() => handleClick(topic.title.toLowerCase())}
+      onClick={() => handleClick(topic.title.toLowerCase())}
     >
       {topic.title}
     </TabButton>
@@ -33,10 +34,9 @@ export default function Examples() {
   );
 
   return (
-    <section id="examples">
-      <h2>Examples</h2>
+    <Section id="examples" title="Examples">
       <menu>{tabButtons}</menu>
       {tabContent}
-    </section>
+    </Section>
   );
 }
