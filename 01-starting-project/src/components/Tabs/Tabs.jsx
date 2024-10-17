@@ -1,9 +1,10 @@
 import React from "react";
 
-export default function Tabs({ children, buttons }) {
+export default function Tabs({ children, buttons, ButtonsContainer = "menu" }) {
   return (
+    // The `ButtonsContainer` prop is an HTML element or custom component that will wrap the buttons.
     <>
-      <menu>{buttons}</menu>
+      <ButtonsContainer>{buttons}</ButtonsContainer>
       {children}
     </>
   );

@@ -36,7 +36,12 @@ export default function Examples() {
 
   return (
     <Section id="examples" title="Examples">
-      <Tabs buttons={tabButtons}>{tabContent}</Tabs>
+      <Tabs
+        // ButtonsContainer={"menu"} // or "div" or custom {Section} component
+        buttons={tabButtons}
+      >
+        {tabContent}
+      </Tabs>
     </Section>
   );
 }
