@@ -12,19 +12,31 @@ function App() {
     // console.log(selectedTopic);
   }
 
-  let tabContent = <p>Please select a topic.</p>;
+  const coreConcepts = CORE_CONCEPTS.map((concept) => (
+    <CoreConcept key={concept.title} {...concept} />
+  ));
 
-  if (selectedTopic) {
-    tabContent = (
-      <div id="tab-content">
-        <h3>{EXAMPLES[selectedTopic].title}</h3>
-        <p>{EXAMPLES[selectedTopic].description}</p>
-        <pre>
-          <code>{EXAMPLES[selectedTopic].code}</code>
-        </pre>
-      </div>
-    );
-  }
+  const tabButtons = Object.values(EXAMPLES).map((topic) => (
+    <TabButton
+      key={topic.title.toLowerCase()}
+      isSelected={selectedTopic === topic.title.toLowerCase()}
+      onSelect={() => handleClick(topic.title.toLowerCase())}
+    >
+      {topic.title}
+    </TabButton>
+  ));
+
+  const tabContent = selectedTopic ? (
+    <div id="tab-content">
+      <h3>{EXAMPLES[selectedTopic].title}</h3>
+      <p>{EXAMPLES[selectedTopic].description}</p>
+      <pre>
+        <code>{EXAMPLES[selectedTopic].code}</code>
+      </pre>
+    </div>
+  ) : (
+    <p>Please select a topic.</p>
+  );
 
   return (
     <div>
@@ -32,41 +44,11 @@ function App() {
       <main>
         <section id="core-concepts">
           <h2>Core concepts</h2>
-          <ul>
-            <CoreConcept {...CORE_CONCEPTS[0]} />
-            <CoreConcept {...CORE_CONCEPTS[1]} />
-            <CoreConcept {...CORE_CONCEPTS[2]} />
-            <CoreConcept {...CORE_CONCEPTS[3]} />
-          </ul>
+          <ul>{coreConcepts}</ul>
         </section>
         <section id="examples">
           <h2>Examples</h2>
-          <menu>
-            <TabButton
-              isSelected={selectedTopic === "components"}
-              onSelect={() => handleClick("components")}
-            >
-              Components
-            </TabButton>
-            <TabButton
-              isSelected={selectedTopic === "jsx"}
-              onSelect={() => handleClick("jsx")}
-            >
-              JSX
-            </TabButton>
-            <TabButton
-              isSelected={selectedTopic === "props"}
-              onSelect={() => handleClick("props")}
-            >
-              Props
-            </TabButton>
-            <TabButton
-              isSelected={selectedTopic === "state"}
-              onSelect={() => handleClick("state")}
-            >
-              State
-            </TabButton>
-          </menu>
+          <menu>{tabButtons}</menu>
           {tabContent}
         </section>
       </main>
