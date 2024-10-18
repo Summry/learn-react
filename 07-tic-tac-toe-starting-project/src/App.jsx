@@ -5,7 +5,12 @@ import GameOver from "./components/GameOver/GameOver";
 import { useState } from "react";
 import { WINNING_COMBINATIONS } from "./winning-combinations";
 
-const initialGameBoard = [
+const PLAYERS = {
+  X: "PLAYER 1",
+  O: "PLAYER 2",
+};
+
+const INITIAL_GAMEBOARD = [
   [null, null, null],
   [null, null, null],
   [null, null, null],
@@ -44,17 +49,8 @@ function determineWinner(gameBoard, players) {
   return winner;
 }
 
-function App() {
-  const [players, setPlayers] = useState({
-    X: "Player 1",
-    O: "Player 2",
-  });
-
-  const [gameTurns, setGameTurns] = useState([]);
-
-  const activePlayer = deriveActivePlayer(gameTurns);
-
-  let gameBoard = [...initialGameBoard].map((innerArray) => [...innerArray]);
+function calculateGameBoard(gameTurns) {
+  let gameBoard = [...INITIAL_GAMEBOARD].map((innerArray) => [...innerArray]);
 
   for (const turn of gameTurns) {
     // deriving game board state from gameBoard state from 'App'
@@ -63,6 +59,18 @@ function App() {
 
     gameBoard[row][col] = player;
   }
+
+  return gameBoard;
+}
+
+function App() {
+  const [players, setPlayers] = useState(PLAYERS);
+
+  const [gameTurns, setGameTurns] = useState([]);
+
+  const activePlayer = deriveActivePlayer(gameTurns);
+
+  const gameBoard = calculateGameBoard(gameTurns);
 
   const winner = determineWinner(gameBoard, players);
 
@@ -99,13 +107,13 @@ function App() {
       <div id="game-container">
         <ol id="players" className="highlight-player">
           <Player
-            initialName={"PLAYER 1"}
+            initialName={PLAYERS.X}
             symbol={"X"}
             isActive={activePlayer === "X"}
             onNameChange={handlePlayerNameChange}
           />
           <Player
-            initialName={"PLAYER 2"}
+            initialName={PLAYERS.O}
             symbol={"O"}
             isActive={activePlayer === "O"}
             onNameChange={handlePlayerNameChange}
