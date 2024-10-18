@@ -45,6 +45,7 @@ function App() {
         <GameBoard
           onSelectSquare={handleSelectSquare}
           activePlayerSymbol={activePlayer}
+          turns={gameTurns}
         />
       </div>
       <div id="game-container">
