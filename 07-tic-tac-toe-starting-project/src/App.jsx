@@ -48,9 +48,7 @@ function App() {
           turns={gameTurns}
         />
       </div>
-      <div id="game-container">
-        <Log />
-      </div>
+      <Log turns={gameTurns} />
     </main>
   );
 }
