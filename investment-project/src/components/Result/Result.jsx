@@ -1,11 +1,9 @@
 import React from "react";
 
-const results = [];
-
 export default function Result({ results }) {
   const formattedResults = results
-    ? results.map((result) => (
-        <tr>
+    ? results.map((result, index) => (
+        <tr key={index}>
           <td>{result.year}</td>
           <td>{result.investmentValue}</td>
           <td>{result.interestYear}</td>
