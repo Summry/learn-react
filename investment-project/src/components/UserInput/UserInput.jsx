@@ -1,7 +1,16 @@
-import React from 'react'
+import React from "react";
 
-export default function UserInput() {
+export default function UserInput({ labelTitle, ...props }) {
   return (
-    <div>UserInput</div>
-  )
+    <div>
+      <label htmlFor="">{labelTitle}</label>
+      <input
+        type="number"
+        required
+        min={0}
+        defaultValue={0}
+        inputMode="numeric"
+      />
+    </div>
+  );
 }
