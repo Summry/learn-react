@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function UserInput({ labelTitle, ...props }) {
+export default function UserInput({ labelTitle }) {
   return (
     <div>
       <label htmlFor="">{labelTitle}</label>
