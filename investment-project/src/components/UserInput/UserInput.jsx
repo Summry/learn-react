@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function UserInput({ labelTitle: children }) {
+export default function UserInput({ children }) {
   const [inputValue, setInputValue] = useState(0);
 
   function handleValueChange(event) {
