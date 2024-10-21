@@ -7,6 +7,7 @@ export default function UserInput({ onChange, userData }) {
           <input
             type="number"
             required
+            min={0}
             value={userData.initialInvestment}
             inputMode="numeric"
             onChange={(event) =>
@@ -19,6 +20,7 @@ export default function UserInput({ onChange, userData }) {
           <input
             type="number"
             required
+            min={0}
             value={userData.annualInvestment}
             inputMode="numeric"
             onChange={(event) =>
@@ -33,6 +35,7 @@ export default function UserInput({ onChange, userData }) {
           <input
             type="number"
             required
+            min={0}
             value={userData.expectedReturn}
             inputMode="numeric"
             onChange={(event) => onChange(event.target.value, "expectedReturn")}
@@ -43,6 +46,7 @@ export default function UserInput({ onChange, userData }) {
           <input
             type="number"
             required
+            min={0}
             value={userData.duration}
             inputMode="numeric"
             onChange={(event) => onChange(event.target.value, "duration")}
