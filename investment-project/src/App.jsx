@@ -3,34 +3,28 @@ import Header from "./components/Header/Header";
 import Result from "./components/Result/Result";
 import UserInput from "./components/UserInput/UserInput";
 
-const LABELS = {
-  top: ["INITIAL INVESTMENT", "ANNUAL INVESTMENT"],
-  bottom: ["EXPECTED RETURN", "DURATION"],
-};
-
 function App() {
-  const [results, setResults] = useState([
-    {
-      year: 1,
-      investmentValue: 1000,
-      interestYear: 5,
-      totalInterest: 8,
-      investedCapital: 1000,
-    },
-    {
-      year: 2,
-      investmentValue: 2000,
-      interestYear: 6,
-      totalInterest: 13,
-      investedCapital: 2000,
-    },
-  ]);
+  const [userData, setUserData] = useState({
+    initialInvestment: 10000,
+    annualInvestment: 1000,
+    expectedReturn: 6,
+    duration: 10,
+  });
+
+  function handleChange(newDataValue, inputIdentifier) {
+    setUserData((prevData) => {
+      return {
+        ...prevData,
+        [inputIdentifier]: +newDataValue,
+      };
+    });
+  }
 
   return (
     <>
       <Header />
-      <UserInput />
-      <Result results={results}>some list of calculations</Result>
+      <UserInput userData={userData} onChange={handleChange} />
+      <Result userData={userData} />
     </>
   );
 }

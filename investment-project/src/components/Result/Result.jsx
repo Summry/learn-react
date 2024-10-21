@@ -1,17 +1,32 @@
 import React from "react";
+import { calculateInvestmentResults, formatter } from "../../util/investment";
 
-export default function Result({ results }) {
-  const formattedResults = results
-    ? results.map((result, index) => (
-        <tr key={index}>
-          <td>{result.year}</td>
-          <td>{result.investmentValue}</td>
-          <td>{result.interestYear}</td>
-          <td>{result.totalInterest}</td>
-          <td>{result.investedCapital}</td>
-        </tr>
-      ))
-    : null;
+export default function Result({ userData }) {
+  const calculatedData = calculateInvestmentResults(userData);
+
+  const initialInvestment =
+    calculatedData[0].valueEndOfYear -
+    calculatedData[0].interest -
+    calculatedData[0].annualInvestment;
+
+  const formattedResults = calculatedData.map((data) => {
+    const totalInterestValue =
+      data.valueEndOfYear -
+      data.annualInvestment * data.year -
+      initialInvestment;
+
+    const totalCapitalInvested = data.valueEndOfYear - totalInterestValue;
+
+    return (
+      <tr key={data.year}>
+        <td>{data.year}</td>
+        <td>{formatter.format(data.valueEndOfYear)}</td>
+        <td>{formatter.format(data.interest)}</td>
+        <td>{formatter.format(totalInterestValue)}</td>
+        <td>{formatter.format(totalCapitalInvested)}</td>
+      </tr>
+    );
+  });
 
   return (
     <table id="result">
