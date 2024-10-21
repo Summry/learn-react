@@ -11,6 +11,8 @@ function App() {
     duration: 10,
   });
 
+  const inputIsValid = userData.duration > 0;
+
   function handleChange(newDataValue, inputIdentifier) {
     setUserData((prevData) => {
       return {
@@ -24,7 +26,12 @@ function App() {
     <>
       <Header />
       <UserInput userData={userData} onChange={handleChange} />
-      <Result userData={userData} />
+      {!inputIsValid && (
+        <p className="center">
+          Please enter an investment duration greater than zero.
+        </p>
+      )}
+      {inputIsValid && <Result userData={userData} />}
     </>
   );
 }
