@@ -17,6 +17,10 @@ export default function App() {
 
   function handleUserDataChange(inputCategory, newValue) {
     setUserData((prevData) => {
+      if (inputCategory === "duration" && newValue > 50) {
+        newValue = 50;
+      }
+      
       return {
         ...prevData,
         [inputCategory]: +newValue,
