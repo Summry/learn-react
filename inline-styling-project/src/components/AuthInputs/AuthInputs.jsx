@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./AuthInputs.css";
+// import "./AuthInputs.css";
 
 export default function AuthInputs() {
   const [enteredEmail, setEnteredEmail] = useState("");
