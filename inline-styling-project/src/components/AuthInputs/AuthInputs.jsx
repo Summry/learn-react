@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "../Button";
 // import "./AuthInputs.css";
 
 export default function AuthInputs() {
@@ -44,12 +45,12 @@ export default function AuthInputs() {
         </p>
       </div>
       <div className="actions">
-        <button type="button" className="text-button">
+        <Button type="button" className="text-button">
           Create a new account
-        </button>
-        <button className="button" onClick={handleLogin}>
+        </Button>
+        <Button type="button" className="button" onClick={handleLogin}>
           Sign In
-        </button>
+        </Button>
       </div>
     </div>
   );
