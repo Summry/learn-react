@@ -1,12 +1,22 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useImperativeHandle, useRef } from "react";
 
 // to move an html element ref UP a level, we must use forwardRef in this way
 const ResultModal = forwardRef(function ResultModal(
   { result, targetTime },
   ref
 ) {
+  const dialogRef = useRef();
+
+  useImperativeHandle(ref, () => {
+    return {
+      open() {
+        dialogRef.current.showModal();
+      },
+    };
+  });
+
   return (
-    <dialog ref={ref} className="result-modal">
+    <dialog ref={dialogRef} className="result-modal">
       <h2>You {result}</h2>
       <p>
         The target time was <strong>{targetTime} seconds.</strong>
