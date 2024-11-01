@@ -5,22 +5,30 @@ import Home from "./components/Home/Home";
 
 function App() {
   const [projectList, setProjectList] = useState([]);
-  const [createProject, setCreateProject] = useState(false);
-  const [activeProject, setActiveProject] = useState({}); // used to open or switch between projects from the project list
+  const [projectState, setProjectState] = useState({
+    createProject: false,
+    activeProject: {
+      active: false,
+      projectDetails: {},
+    },
+  });
 
-  function onBtnClick() {
-    setCreateProject(true);
+  function onNewProject() {
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+      };
+    });
   }
 
   return (
-    <>
-      <ProjectList list={projectList} />
-      {(!createProject || !activeProject) && <Home onBtnClick={onBtnClick} />}
-      {createProject && <CreateProject />}
-      <h1 className="my-8 text-center text-5xl font-bold">
-        No Project Selected
-      </h1>
-    </>
+    <main className="h-screen my-8 flex gap-8">
+      <ProjectList list={projectList} onNewProject={onNewProject} />
+      {(!projectState.createProject || !projectState.activeProject.active) && (
+        <Home onNewProject={onNewProject} />
+      )}
+      {projectList.createProject && <CreateProject />}
+    </main>
   );
 }
 

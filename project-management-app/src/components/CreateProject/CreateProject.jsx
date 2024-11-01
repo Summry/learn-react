@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function CreateProject() {
+export default function CreateProject({ onCreateNewProject }) {
   const todaysDate = new Date().toISOString().split("T")[0];
 
   return (
