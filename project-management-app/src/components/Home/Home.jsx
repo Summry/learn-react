@@ -7,7 +7,7 @@ export default function Home({ onNewProject }) {
       <img
         src={appLogo}
         alt="Clipboard with a pen"
-        className="w-16 h-16 object-contain mx-auto"
+        className="w-16 h-16 object-contain mx-auto mb-4"
       />
       <h2 className="text-xl font-bold text-stone-700 mb-4">
         No project selected

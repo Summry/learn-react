@@ -17,7 +17,22 @@ function App() {
     setProjectState((prevState) => {
       return {
         ...prevState,
+        createProject: true,
       };
+    });
+  }
+
+  function onCreateNewProject(formData) {
+    // formData is obtained from CreateProject component form
+    setProjectList((prevList) => {
+      return [
+        ...prevList,
+        {
+          title: formData.title,
+          description: formData.description,
+          dueDate: formData.dueDate,
+        },
+      ];
     });
   }
 
@@ -27,7 +42,9 @@ function App() {
       {(!projectState.createProject || !projectState.activeProject.active) && (
         <Home onNewProject={onNewProject} />
       )}
-      {projectList.createProject && <CreateProject />}
+      {projectList.createProject && (
+        <CreateProject onCreateNewProject={onCreateNewProject} />
+      )}
     </main>
   );
 }
