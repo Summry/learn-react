@@ -5,20 +5,30 @@ import Home from "./components/Home/Home";
 
 function App() {
   const [projectList, setProjectList] = useState([]);
-  const [projectState, setProjectState] = useState({
-    createProject: false,
-    activeProject: {
+  const [appState, setAppState] = useState({
+    viewCreateProject: false,
+    viewActiveProject: {
       active: false,
       projectDetails: {},
     },
   });
 
   function onNewProject() {
-    setProjectState((prevState) => {
+    setAppState((prevState) => {
       return {
         ...prevState,
-        createProject: true,
+        viewCreateProject: true,
       };
+    });
+  }
+
+  function onCancelCreateNewProject() {
+    setAppState({
+      viewCreateProject: false,
+      viewActiveProject: {
+        active: false,
+        projectDetails: {},
+      },
     });
   }
 
@@ -38,12 +48,17 @@ function App() {
 
   return (
     <main className="h-screen my-8 flex gap-8">
-      <ProjectList list={projectList} onNewProject={onNewProject} />
-      {(!projectState.createProject || !projectState.activeProject.active) && (
+      <ProjectList projectList={projectList} onNewProject={onNewProject} />
+
+      {!appState.viewCreateProject && !appState.viewActiveProject.active && (
         <Home onNewProject={onNewProject} />
       )}
-      {projectList.createProject && (
-        <CreateProject onCreateNewProject={onCreateNewProject} />
+
+      {appState.viewCreateProject && (
+        <CreateProject
+          onCreateNewProject={onCreateNewProject}
+          onCancel={onCancelCreateNewProject}
+        />
       )}
     </main>
   );

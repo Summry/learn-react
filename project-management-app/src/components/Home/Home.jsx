@@ -1,4 +1,3 @@
-import React from "react";
 import appLogo from "../../assets/no-projects.png";
 
 export default function Home({ onNewProject }) {
@@ -12,10 +11,15 @@ export default function Home({ onNewProject }) {
       <h2 className="text-xl font-bold text-stone-700 mb-4">
         No project selected
       </h2>
-      <p className="text-stone-600 mb-4">
+      <p className="text-stone-600 mb-7">
         Select a project or get started with a new one
       </p>
-      <button onClick={onNewProject}>Create a Project</button>
+      <button
+        onClick={onNewProject}
+        className="px-6 py-2 rounded-md bg-stone-800 text-stone-300 hover:bg-stone-950"
+      >
+        Create new Project
+      </button>
     </div>
   );
 }
